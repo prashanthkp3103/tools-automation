@@ -36,3 +36,10 @@
   ansible.builtin.debug:
     msg: "{{ out }}"
 
+- name: Install libicu library dependency for githb runner configure
+  ansible.builtin.dnf:
+    name: libicu
+    state: latest
+
+- name: configure github runner
+  ansible.builtin.shell: /actions-runner/config.sh --url https://github.com/prashanthkp3103/tools-automation --token AFRHZZ46ZBZP5GXCMMDZSUTGWDUZK
