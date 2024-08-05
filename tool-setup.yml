@@ -1,6 +1,6 @@
-- name: Github custom runner tool setup
+- name: Setup Github action tool with ansible
   hosts: all
-  become: true
+  become: yes
   roles:
     - "{{ tool_name }}"
 

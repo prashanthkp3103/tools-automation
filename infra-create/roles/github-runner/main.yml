@@ -1,5 +1,5 @@
-- debug:
-    msg: hello
+#- debug:
+#    msg: hello
 
 - name: set prompt
   ansible.builtin.shell: set-prompt github-runner
