@@ -47,7 +47,7 @@
 
 - name: print token
   ansible.builtin.debug:
-    msg: "{{ out }}" #comes from register of previous task
+    msg: "{{ token }}" #comes from register of previous task
 
 - name: Install libicu library dependency for githb runner configure
   ansible.builtin.dnf:
@@ -55,7 +55,7 @@
     state: latest
 
 - name: configure github runner
-  ansible.builtin.shell: ./config.sh --url https://github.com/prashanthkp3103 --token {{ out.stdout }} --runner-group Default --name ec2 --labels rhel --work _work --replace
+  ansible.builtin.shell: ./config.sh --url https://github.com/prashanthkp3103 --token {{ token.stdout }} --runner-group Default --name ec2 --labels rhel --work _work --replace
   args:
     chdir: /actions-runner
   become_user: grunner
