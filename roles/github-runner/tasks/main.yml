@@ -4,10 +4,16 @@
 - name: set prompt
   ansible.builtin.shell: set-prompt github-runner
 
+- name: add github runner user
+  ansible.builtin.user:
+    name: grunner
+
 - name: create github directory for runner
   ansible.builtin.file:
     path: /actions-runner
     state: directory
+  owner: grunner
+  group: grunner
 
 #Download frontend code and extract zip file ansible module
 - name: Download and extract github actions runner zip file ansible module
@@ -45,4 +51,4 @@
   ansible.builtin.shell: ./config.sh --url https://github.com/prashanthkp3103 --token {{ out.stdout }} --runner-group Default --name ec2 --labels rhel --work _work --replace
   args:
     chdir: /actions-runner
-  become_user: ec2-user
+  become_user: grunner
