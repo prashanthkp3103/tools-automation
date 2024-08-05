@@ -1,5 +1,8 @@
-#- debug:
-#    msg: hello
+# Following steps need to be run manually
+# sudo curl -L -o /etc/yum.repos.d/gh-cli.repo https://cli.github.com/packages/rpm/gh-cli.repo
+# sudo dnf install gh -y
+# gh auth login
+# gh auth login -s admin:org
 
 - name: set prompt
   ansible.builtin.shell: set-prompt github-runner
@@ -24,15 +27,15 @@
     owner: grunner
     group: grunner
 
-- name: Download github cli repo
-  ansible.builtin.get_url:
-    url: https://cli.github.com/packages/rpm/gh-cli.repo
-    dest: /etc/yum.repos.d/gh-cli.repo
-
-- name: install github cli
-  ansible.builtin.dnf:
-    name: gh
-    state: latest
+#- name: Download github cli repo
+#  ansible.builtin.get_url:
+#    url: https://cli.github.com/packages/rpm/gh-cli.repo
+#    dest: /etc/yum.repos.d/gh-cli.repo
+#
+#- name: install github cli
+#  ansible.builtin.dnf:
+#    name: gh
+#    state: latest
 
 
 - name: grab token
@@ -41,9 +44,9 @@
   register: out
   become_user: ec2-user #token can be fetched ec2-user
 
-#- name: print token
-#  ansible.builtin.debug:
-#    msg: "{{ out }}"
+- name: print token
+  ansible.builtin.debug:
+    msg: "{{ out }}" #comes from register of previous task
 
 - name: Install libicu library dependency for githb runner configure
   ansible.builtin.dnf:
