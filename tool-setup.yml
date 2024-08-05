@@ -2,8 +2,8 @@
   hosts: all
   become: true
   roles:
-    - "{{ role_name }}" # this command line argument
+    - "{{ tool_name }}" # this command line argument
 
 
 #ansible-playbook -i <github-rubber ip>, tool-setup.yml -e ansible_user=ec2-user -e ansible_password=Devops321 -e tool_name=github-runner
-#ansible-playbook -i 172.31.40.206, tool-setup.yml -e ansible_user=ec2-user -e ansible_password=DevOps321 -e role_name=github-runner
+#ansible-playbook -i 172.31.40.206, tool-setup.yml -e ansible_user=ec2-user -e ansible_password=DevOps321 -e tool_name=github-runner
