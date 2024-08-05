@@ -1,8 +1,8 @@
 - name: Setup Github action tool with ansible
   hosts: all
-  become: yes
+  become: true
   roles:
-    - "{{ tool_name }}"
+    - "{{ role_name }}" # this command line argument
 
 
 #ansible-playbook -i <github-rubber ip>, tool-setup.yml -e ansible_user=ec2-user -e ansible_password=Devops321 -e tool_name=github-runner
