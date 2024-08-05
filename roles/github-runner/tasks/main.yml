@@ -12,8 +12,8 @@
   ansible.builtin.file:
     path: /actions-runner
     state: directory
-  owner: grunner
-  group: grunner
+    owner: grunner
+    group: grunner
 
 #Download frontend code and extract zip file ansible module
 - name: Download and extract github actions runner zip file ansible module
