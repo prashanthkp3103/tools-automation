@@ -2,6 +2,7 @@
 # Following steps need to be run manually
 # sudo curl -L -o /etc/yum.repos.d/gh-cli.repo https://cli.github.com/packages/rpm/gh-cli.repo
 # sudo dnf install gh -y
+# Run below commands with ec2-user
 # gh auth login
 # gh auth login -s admin:org
 
@@ -59,3 +60,8 @@
   args:
     chdir: /actions-runner
   become_user: grunner
+
+- name: Install and start runner service
+  ansible.builtin.shell: ./svc.sh install grunner; ./svc.sh start
+  args:
+    chdir: /actions-runner
