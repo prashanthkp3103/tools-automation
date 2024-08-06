@@ -81,6 +81,7 @@
   ansible.builtin.shell: ./svc.sh install grunner; ./svc.sh start
   args:
     chdir: /actions-runner
-  when: runner_count.stdout == "0"
+  when: runner_count.stdout == "0" # doube qyote is bcoz saying it is string
+
 
   #above task runs only when runner_count is 0, if it is 1 it wont run
