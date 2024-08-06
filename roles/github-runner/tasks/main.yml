@@ -55,13 +55,23 @@
     name: libicu
     state: latest
 
+- name: Get the running runner count
+  ansible.builtin.shell:
+    gh api  -H "Accept: application/vnd.github+json"  -H "X-GitHub-Api-Version: 2022-11-28"  /orgs/prashanthkp3103/actions/runners?per_page=100 | jq .total_count
+  register: runner_count
+
+
 - name: configure github runner
   ansible.builtin.shell: ./config.sh --url https://github.com/prashanthkp3103 --token {{ token.stdout }} --runnergroup Default --name ec2 --labels rhel --work _work --replace
   args:
     chdir: /actions-runner
   become_user: grunner
+  when: runner_count.stdout == 0
+  #above task runs only when runner_count is 0, if it is 1 it wont run
 
 - name: Install and start runner service
   ansible.builtin.shell: ./svc.sh install grunner; ./svc.sh start
   args:
     chdir: /actions-runner
+  when: runner_count.stdout == 0
+  #above task runs only when runner_count is 0, if it is 1 it wont run
