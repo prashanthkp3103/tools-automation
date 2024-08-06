@@ -59,6 +59,7 @@
   ansible.builtin.shell:
     gh api  -H "Accept: application/vnd.github+json"  -H "X-GitHub-Api-Version: 2022-11-28"  /orgs/prashanthkp3103/actions/runners?per_page=100 | jq .total_count
   register: runner_count
+  become_user: ec2_user
 
 
 - name: configure github runner
@@ -74,4 +75,5 @@
   args:
     chdir: /actions-runner
   when: runner_count.stdout == 0
+
   #above task runs only when runner_count is 0, if it is 1 it wont run
