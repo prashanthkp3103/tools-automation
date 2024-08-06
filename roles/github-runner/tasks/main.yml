@@ -65,6 +65,10 @@
   debug:
     msg: "{{ runner_count.stdout }}"
 
+- name: debug replace space with no space
+  debug:
+    msg: "{{ runner_count.stdout | regex_replace(' ', '') }}"
+
 - name: configure github runner
   ansible.builtin.shell: ./config.sh --url https://github.com/prashanthkp3103 --token {{ token.stdout }} --runnergroup Default --name ec2 --labels rhel --work _work --replace
   args:
