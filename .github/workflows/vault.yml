@@ -1,0 +1,17 @@
+# Optional - The name of the workflow as it will appear in the "Actions" tab of the GitHub repository. If this field is omitted, the name of the workflow file will be used instead.
+name: Run Vault set
+
+# Optional - The name for workflow runs generated from the workflow, which will appear in the list of workflow runs on your repository's "Actions" tab. This example uses an expression with the `github` context to display the username of the actor that triggered the workflow run. For more information, see "[AUTOTITLE](/actions/using-workflows/workflow-syntax-for-github-actions#run-name)."
+#run-name: ${{ github.actor }} is learning GitHub Actions
+
+# Specifies the trigger for this workflow. This example uses the `push` event, so a workflow run is triggered every time someone pushes a change to the repository or merges a pull request.  This is triggered by a push to every branch; for examples of syntax that runs only on pushes to specific branches, paths, or tags, see "[AUTOTITLE](/actions/reference/workflow-syntax-for-github-actions#onpushpull_requestpull_request_targetpathspaths-ignore)."
+on: [push, workflow_dispatch]
+
+
+jobs:
+  Provisions:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run vault setup
+        run: git pull;ansible-playbook -i vault-internal.meppk.xyz, tool-setup.yml -e ansible_user=ec2-user -e ansible_password=DevOps321 -e tool_name=vault
