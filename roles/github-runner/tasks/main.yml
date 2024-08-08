@@ -96,12 +96,3 @@
     name: terraform
     state: latest
 
-- name: Copy vault Repo file
-  ansible.builtin.get_url:
-    url: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
-    dest: /etc/yum.repos.d/hashicorp.repo
-
-- name: Installing vault
-  ansible.builtin.dnf:
-    name: terraform
-    state: latest
