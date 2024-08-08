@@ -70,7 +70,7 @@
 #    msg: "{{ runner_count.stdout | regex_replace(' ', '') }}"
 
 - name: configure github runner
-  ansible.builtin.shell: ./config.sh --url https://github.com/prashanthkp3103 --token {{ token.stdout }} --runnergroup Default --name ec2 --labels rhel --work _work --replace
+  ansible.builtin.shell: ./config.sh --url https://github.com/prashanthkp3103 --token {{ token.stdout }} --runnergroup Default --name ec2-"{{ tool_name }}" --labels rhel --work _work --replace
   args:
     chdir: /actions-runner
   become_user: grunner
