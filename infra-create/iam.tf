@@ -40,7 +40,7 @@ resource "aws_iam_role" "terraformrole" {
   resource "aws_iam_role_policy_attachment" "policy" {
     #since it is list hence count
     count      = length(var.policy_name)
-    name       = aws_iam_role.terraformrole
+    role       = aws_iam_role.terraformrole
     policy_arn = "arn:aws:iam::aws:policy/${var.policy_name[count.index]}"
   }
 
