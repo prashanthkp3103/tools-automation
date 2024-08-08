@@ -85,3 +85,13 @@
 
 
   #above task runs only when runner_count is 0, if it is 1 it wont run
+
+- name: Copy Terraform Repo file
+  ansible.builtin.get_url:
+    url: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+    path: /etc/yum.repo.d/hashicorp.repo
+
+- name: Installing Terraform
+  ansible.builtin.dnf:
+    name: terraform
+    state: latest
