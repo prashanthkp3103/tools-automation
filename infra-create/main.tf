@@ -42,4 +42,12 @@ resource "aws_security_group" "tool-sg" {
   }
 }
 
+resource "aws_route53_record" "record" {
+  zone_id = var.hostedzone_id
+  name    = "${var.hostedzone_id}-internal"
+  type    = "A"
+  ttl     = 300
+  records = [aws_instance.tool.private_ip]
+}
+
 
