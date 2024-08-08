@@ -14,9 +14,9 @@ PRINT copying Jenkins repo config file
 cp jenkins.repo /etc/yum.repos.d/jenkins.repo &>>$LOG_FILE
 
 if [ $? -eq 0 ]; then
-  echo -e "\e[32m-Downloading-Jenkins-repo-config-file-SUCCESS-\e[0m"
+  echo -e "\e[32m-SUCCESS-\e[0m"
 else
-  echo -e "\e[31m-Downloading-Jenkins-repo-config-file-FAILURE-\e[0m"
+  echo -e "\e[31m-FAILURE-\e[0m"
   exit 1
 fi
 
@@ -38,9 +38,9 @@ PRINT import Jenkins key
 rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key &>>$LOG_FILE
 
 if [ $? -eq 0 ]; then
-  echo -e "\e[32m-import-Jenkins-key-SUCCESS-\e[0m"
+  echo -e "\e[32m-SUCCESS-\e[0m"
 else
-  echo -e "\e[31m-import Jenkins key-FAILURE-\e[0m"
+  echo -e "\e[31m-FAILURE-\e[0m"
   exit 1
 fi
 
@@ -49,9 +49,9 @@ PRINT Installing Jenkins Prerequisite -Java
 yum install fontconfig java-17-openjdk &>>$LOG_FILE
 
 if [ $? -eq 0 ]; then
-  echo -e "\e[32m-Installing Jenkins Prerequisite -Java-SUCCESS-\e[0m"
+  echo -e "\e[32m-SUCCESS-\e[0m"
 else
-  echo -e "\e[31m-Installing Jenkins Prerequisite -Java-FAILURE-\e[0m"
+  echo -e "\e[31m-FAILURE-\e[0m"
   exit 1
 fi
 
@@ -60,9 +60,9 @@ PRINT Installing Jenkins
 yum install jenkins -y &>>$LOG_FILE
 
 if [ $? -eq 0 ]; then
-  echo -e "\e[32m-Installing Jenkins-SUCCESS-\e[0m"
+  echo -e "\e[32m-SUCCESS-\e[0m"
 else
-  echo -e "\e[31m-Installing Jenkins-FAILURE-\e[0m"
+  echo -e "\e[31m-FAILURE-\e[0m"
   exit 1
 fi
 
@@ -70,10 +70,11 @@ fi
 
 
 PRINT Starting Jenkins
+systemctl enable jenkins &>>$LOG_FILE
 systemctl restart jenkins &>>$LOG_FILE
 if [ $? -eq 0 ]; then
-  echo -e "\e[32m-Starting Jenkins-SUCCESS-\e[0m"
+  echo -e "\e[32m-SUCCESS-\e[0m"
 else
-  echo -e "\e[31m-Starting Jenkins-FAILURE-\e[0m"
+  echo -e "\e[31m-FAILURE-\e[0m"
   exit 1
 fi
