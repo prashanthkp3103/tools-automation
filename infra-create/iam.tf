@@ -44,4 +44,10 @@ resource "aws_iam_role" "terraformrole" {
     policy_arn = "arn:aws:iam::aws:policy/${var.policy_name[count.index]}"
   }
 
+#creating instance profile for ec2
+resource "aws_iam_instance_profile" "instance_profile" {
+  name = "${var.name}-role"
+  role = aws_iam_role.terraformrole.name
+}
+
 
