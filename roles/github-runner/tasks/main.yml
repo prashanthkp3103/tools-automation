@@ -87,7 +87,7 @@
   when: runner_count.stdout == "0" or runner_status.stdout == "offline"
   #above task runs only when runner_count is 0, if it is 1 it wont run
 
-- name: Update Path file
+- name: Update Path file # the reason we used this method is grunner path is different to run ansible
   ansible.builtin.file:
     src: path
     dest: /actions-runner/.path
