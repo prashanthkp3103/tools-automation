@@ -64,7 +64,7 @@
 
 - name: Get the github runner is offline is online based ec2 name #xargs is used to remove space as it is coming
   ansible.builtin.shell: |
-    gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /orgs/prashanthkp3103/actions/runners | jq '.runners[] | select(.name == "ec2") | .status' | xargs
+    gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /orgs/prashanthkp3103/actions/runners | jq '.runners[] | select(.name == "ec2") | .status' |xargs
 #gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /orgs/prashanthkp3103/actions/runners | jq .runners[].status
   register: runner_status
   become_user: ec2-user
@@ -82,14 +82,14 @@
   args:
     chdir: /actions-runner
   become_user: grunner
-  when: runner_count.stdout == "0" or runner_status.stdout = "offline"
+  when: runner_count.stdout == "0" or runner_status.stdout == "offline"
   #above task runs only when runner_count is 0, if it is 1 it wont run
 
 - name: Install and start runner service
   ansible.builtin.shell: ./svc.sh install grunner; ./svc.sh start
   args:
     chdir: /actions-runner
-  when: runner_count.stdout == "0" or runner_status.stdout = "offline" # doube qyote is bcoz saying it is string
+  when: runner_count.stdout == "0" or runner_status.stdout == "offline" # doube qyote is bcoz saying it is string
 
 
   #above task runs only when runner_count is 0, if it is 1 it wont run
