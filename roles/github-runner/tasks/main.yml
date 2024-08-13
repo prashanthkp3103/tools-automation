@@ -64,7 +64,7 @@
 
 - name: Get the github runner is offline is online based ec2 name #xargs is used to remove space as it is coming
   ansible.builtin.shell: |
-    gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /orgs/prashanthkp3103/actions/runners | jq '.runners[] | select(.name == "ec2") | .status'
+    gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /orgs/prashanthkp3103/actions/runners | jq '.runners[] | select(.name == "ec2") | .status' | xargs
 #gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /orgs/prashanthkp3103/actions/runners | jq .runners[].status
   register: runner_status
   become_user: ec2-user
