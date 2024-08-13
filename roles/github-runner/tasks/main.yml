@@ -69,6 +69,13 @@
   register: runner_status
   become_user: ec2-user
 
+- name: Update Path file
+  ansible.builtin.file:
+    src: path
+    dest: /actions-runner/.path
+  become_user: grunner
+  when: runner_count.stdout == "0" or runner_status.stdout == "offline"
+
 #- name: debug
 #  debug:
 #    msg: " {{ runner_count.stdout }}" purposefully give space at space hence it will give
