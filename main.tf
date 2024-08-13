@@ -6,6 +6,7 @@ module "tool-infra-create" {
   #policy_name comes from variable of actual code
   policy_name = each.value["policy_name"]
   hostedzone_id = var.hostedzone_id
+  ports         = each.value["ports"]
 
 
 }
