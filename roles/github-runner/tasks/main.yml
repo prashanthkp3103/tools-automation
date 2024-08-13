@@ -69,12 +69,7 @@
   register: runner_status
   become_user: ec2-user
 
-- name: Update Path file
-  ansible.builtin.file:
-    src: path
-    dest: /actions-runner/.path
-  become_user: grunner
-  when: runner_count.stdout == "0" or runner_status.stdout == "offline"
+
 
 #- name: debug
 #  debug:
@@ -91,6 +86,13 @@
   become_user: grunner
   when: runner_count.stdout == "0" or runner_status.stdout == "offline"
   #above task runs only when runner_count is 0, if it is 1 it wont run
+
+- name: Update Path file
+  ansible.builtin.file:
+    src: path
+    dest: /actions-runner/.path
+  become_user: grunner
+  when: runner_count.stdout == "0" or runner_status.stdout == "offline"
 
 - name: Install and start runner service
   ansible.builtin.shell: ./svc.sh install grunner; ./svc.sh start
