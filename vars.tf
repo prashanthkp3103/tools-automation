@@ -1,3 +1,5 @@
+#map variable all the inputs goes from here
+
 variable "tools" {
   default = {
     github-runner = {
@@ -5,6 +7,7 @@ variable "tools" {
       policy_name = [
         "AdministratorAccess"
       ]
+      #below port we are sending empty
       ports = {}
       volume_size = 40
 

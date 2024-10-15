@@ -1,4 +1,5 @@
 module "tool-infra-create" {
+  #below loop is map variable of tools
   for_each = var.tools
   source = "./infra-create"
   name = each.key
