@@ -5,14 +5,14 @@
   ansible.builtin.shell: growpart /dev/nvme0n1 4 ; lvextend -r -L +12G /dev/mapper/RootVG-varVol
   ignore_errors: true
 
-- name: install minikube
-  ansible.builtin.shell: https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
+- name: install minikube and docker
+  ansible.builtin.shell: dnf install docker https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm - y
   state: installed
-
-- name: Install Dockeer
-  ansible.builtin.dnf:
-    name: docker
-    state: installed
+#
+#- name: Install Dockeer
+#  ansible.builtin.dnf:
+#    name: docker
+#    state: installed
 
 - name: Download kubectl
   ansible.builtin.get_url:
@@ -21,5 +21,6 @@
     mode: '0755'
 
 - name: Start Minikube
+  ansible.builtin.shell: minikube start --force
 
 
