@@ -84,6 +84,7 @@
   args:
     chdir: /actions-runner
   become_user: grunner
+  #below "0" is to denote as string
   when: runner_count.stdout == "0" or runner_status.stdout == "offline"
   #above task runs only when runner_count is 0, if it is 1 it wont run
 
@@ -93,6 +94,7 @@
     dest: /actions-runner/.path
   become_user: grunner
   when: runner_count.stdout == "0" or runner_status.stdout == "offline"
+  ignore_errors: true
 
 - name: Install and start runner service
   ansible.builtin.shell: ./svc.sh install grunner; ./svc.sh start
