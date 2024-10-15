@@ -6,7 +6,7 @@
   ignore_errors: true
 
 - name: install minikube and docker
-  ansible.builtin.shell: dnf install docker https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm - y
+  ansible.builtin.shell: dnf install https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm docker - y
   state: installed
 #
 #- name: Install Dockeer
