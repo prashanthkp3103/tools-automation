@@ -10,6 +10,11 @@ step2: run terraform code manually
 
 Github runner provision
 
+login to instance
+install github cli
+do gh auth login -s admin:org
+do gh auth status
+
 first checkout the code into workstation vm
 run terraform code
 then from workstation run manually
