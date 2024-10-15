@@ -6,6 +6,7 @@ variable "tools" {
         "AdministratorAccess"
       ]
       ports = {}
+      volume_size = 40
 
     }
 
@@ -15,7 +16,18 @@ variable "tools" {
       ports = {
         vault = 8200
       }
+      volume_size = 30
     }
+
+    minikube = {
+      instance_type = "t3.medium"
+      policy_name = []
+      ports = {
+        vault = 8433
+      }
+      volume_size = 50
+    }
+
 
 
   }

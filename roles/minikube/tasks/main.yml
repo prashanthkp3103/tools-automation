@@ -1,0 +1,25 @@
+- name: Set prompt
+  ansible.builtin.shell: set-prompt vault
+
+- name: Extended Disk volume
+  ansible.builtin.shell: growpart /dev/nvme0n1 4 ; lvextend -r -L +12G /dev/mapper/RootVG-varVol
+  ignore_errors: true
+
+- name: install minikube
+  ansible.builtin.shell: https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
+  state: installed
+
+- name: Install Dockeer
+  ansible.builtin.dnf:
+    name: docker
+    state: installed
+
+- name: Download kubectl
+  ansible.builtin.get_url:
+    url: https://dl.k8s.io/release/v1.30.3/bin/linux/amd64/kubectl
+    dest: /bin/kubectl
+    mode: '0755'
+
+- name: Start Minikube
+
+

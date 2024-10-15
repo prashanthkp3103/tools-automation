@@ -7,6 +7,7 @@ module "tool-infra-create" {
   policy_name = each.value["policy_name"]
   hostedzone_id = var.hostedzone_id
   ports         = each.value["ports"]
+  volume_size   = each.value["volume_size"]
 
 
 }
