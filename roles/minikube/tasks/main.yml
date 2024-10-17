@@ -1,5 +1,5 @@
 - name: Set prompt
-  ansible.builtin.shell: set-prompt vault
+  ansible.builtin.shell: set-prompt minikube
 
 - name: Extended Disk volume
   ansible.builtin.shell: growpart /dev/nvme0n1 4 ; lvextend -r -L +12G /dev/mapper/RootVG-varVol
