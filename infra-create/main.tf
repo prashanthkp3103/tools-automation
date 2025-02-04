@@ -16,7 +16,7 @@ resource "aws_instance" "tool" {
   root_block_device {
     volume_size = var.volume_size
   }
-  user_data   = base64encode(templatefile("${path.module}/userdata.sh"
+  user_data   = base64encode(templatefile("${path.module}/userdata.sh",
 
   tags = {
     Name = var.name
