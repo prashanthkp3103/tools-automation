@@ -3,6 +3,7 @@ resource "aws_instance" "tool" {
   instance_type = var.instance_type
   vpc_security_group_ids = [aws_security_group.tool-sg.id]
   iam_instance_profile = aws_iam_instance_profile.instance_profile.name
+  user_data = file("userdata.sh")
   #below options for spot instances
 #   instance_market_options {
 #     market_type = "spot"
@@ -11,7 +12,7 @@ resource "aws_instance" "tool" {
 #       spot_instance_type = "persistent"
 #     }
 #   }
-  user_data = file("userdata.sh") # Read and pass the userdata.sh file
+  #user_data = file("userdata.sh") # Read and pass the userdata.sh file
 
   root_block_device {
     volume_size = var.volume_size
