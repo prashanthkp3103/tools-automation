@@ -4,6 +4,10 @@ resource "aws_instance" "tool" {
   vpc_security_group_ids = [aws_security_group.tool-sg.id]
   iam_instance_profile = aws_iam_instance_profile.instance_profile.name
   #user_data = file("userdata.sh")
+  user_data = <<-EOF
+              #!/bin/bash
+              pip3.11 install ansible hvac 2>&1 | tee -a /opt/userdata.log
+              EOF
   #below options for spot instances
 #   instance_market_options {
 #     market_type = "spot"
@@ -12,7 +16,6 @@ resource "aws_instance" "tool" {
 #       spot_instance_type = "persistent"
 #     }
 #   }
-  user_data = base64encode(file("userdata.sh"))
 
   root_block_device {
     volume_size = var.volume_size
