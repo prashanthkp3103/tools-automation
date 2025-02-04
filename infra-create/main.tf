@@ -11,7 +11,7 @@ resource "aws_instance" "tool" {
 #       spot_instance_type = "persistent"
 #     }
 #   }
-  user_data =  file("userdata.sh") # Read and pass the userdata.sh file
+  user_data = file("userdata.sh") # Read and pass the userdata.sh file
 
   root_block_device {
     volume_size = var.volume_size
