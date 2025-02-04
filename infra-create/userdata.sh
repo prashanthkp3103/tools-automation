@@ -1,0 +1,1 @@
+pip3.11 install ansible hvac 2>&1 | tee -a /opt/userdata.log

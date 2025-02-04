@@ -3,6 +3,7 @@
 
 - name: Extended Disk volume
   ansible.builtin.shell: growpart /dev/nvme0n1 4 ; lvextend -r -L +12G /dev/mapper/RootVG-varVol
+  #ansible.builtin.shell: growpart /dev/nvme0n1 4 ; lvextend -r -L +100%FREE /dev/mapper/RootVG-varVol
   ignore_errors: true
 
 - name: install minikube and docker

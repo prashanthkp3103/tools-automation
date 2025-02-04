@@ -11,9 +11,12 @@ resource "aws_instance" "tool" {
 #       spot_instance_type = "persistent"
 #     }
 #   }
+
+
   root_block_device {
     volume_size = var.volume_size
   }
+  user_data   = base64encode(templatefile("${path.module}/userdata.sh"
 
   tags = {
     Name = var.name
